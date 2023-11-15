@@ -5,7 +5,7 @@
     "main": "build/src/main.js",
     "scripts": {
         "build": "tsc",
-        "build:digitalocean": "npm install --production=true && npm run build && npm ci",
+        "build:digitalocean": "npm install --production=false && npm run build && npm ci",
         "start": "node build/src/main.js",
         "dev": "ts-node-dev --respawn src/main.ts",
         "test": "echo \"Error: no test specified\" && exit 1"

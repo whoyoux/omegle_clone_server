@@ -5,6 +5,7 @@
     "main": "build/src/main.js",
     "scripts": {
         "build": "tsc",
+        "build:digitalocean": "pnpm install && pnpm build",
         "start": "node build/src/main.js",
         "dev": "ts-node-dev --respawn src/main.ts",
         "test": "echo \"Error: no test specified\" && exit 1"

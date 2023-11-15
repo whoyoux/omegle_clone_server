@@ -5,7 +5,6 @@
     "main": "build/src/main.js",
     "scripts": {
         "build": "tsc",
-        "build:digitalocean": "yarn install --production=false && yarn run build && rm -rf node_modules && yarn install --production --frozen-lockfile",
         "start": "node build/src/main.js",
         "dev": "ts-node-dev --respawn src/main.ts"
     },

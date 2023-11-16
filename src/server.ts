@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import { createServer, Server as HTTPServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
+import cors from "cors";
 
 export class Server {
     private httpServer!: HTTPServer;
@@ -36,6 +37,7 @@ export class Server {
     }
 
     private configureApp(): void {
+        this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
     }

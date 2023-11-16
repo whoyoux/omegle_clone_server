@@ -9,7 +9,13 @@ export class Server {
 
     private readonly DEFAULT_PORT = 5000;
 
+    private readonly CORS_ORIGIN =
+        process.env.NODE_ENV === "production"
+            ? "https://omegle-clone-whx.vercel.app/"
+            : "http://localhost:3000";
+
     constructor() {
+        console.log(`Cors origin: ${this.CORS_ORIGIN}`);
         this.initialize();
 
         this.configureApp();
@@ -24,10 +30,7 @@ export class Server {
 
         this.io = new SocketIOServer(this.httpServer, {
             cors: {
-                origin:
-                    process.env.NODE_ENV === "production"
-                        ? "https://omegle-clone-whx.vercel.app/"
-                        : "http://localhost:3000",
+                origin: this.CORS_ORIGIN,
             },
         });
     }

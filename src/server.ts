@@ -22,10 +22,12 @@ export class Server {
         this.app = express();
         this.httpServer = createServer(this.app);
 
-        //Need to change that!
         this.io = new SocketIOServer(this.httpServer, {
             cors: {
-                origin: "*",
+                origin:
+                    process.env.NODE_ENV === "production"
+                        ? "https://omegle-clone-whx.vercel.app/"
+                        : "http://localhost:3000",
             },
         });
     }
@@ -43,7 +45,11 @@ export class Server {
 
     private handleSocketConnection(): void {
         this.io.on("connection", (socket) => {
-            console.log("Socket connected.");
+            console.log(`Socket connected. ${socket.id}`);
+
+            socket.on("disconnect", () => {
+                console.log("Socket disconnected.");
+            });
         });
     }
 

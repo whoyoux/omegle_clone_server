@@ -10,6 +10,8 @@ export class Server {
 
     private readonly DEFAULT_PORT = 5000;
 
+    private activeSocekts = new Set<string>();
+
     constructor() {
         this.initialize();
 
@@ -50,13 +52,19 @@ export class Server {
         this.app.get("/", (req, res) => {
             res.json({ message: `Hello World from ${req.hostname}` });
         });
+
+        this.app.get("/users", (req, res) => {
+            res.json({ users: [...this.activeSocekts] });
+        });
     }
 
     private handleSocketConnection(): void {
         this.io.on("connection", (socket) => {
+            this.activeSocekts.add(socket.id);
             console.log(`Socket connected. ${socket.id}`);
 
             socket.on("disconnect", () => {
+                this.activeSocekts.delete(socket.id);
                 console.log("Socket disconnected.");
             });
         });

@@ -31,7 +31,7 @@ export class Server {
 
     private handleRoutes(): void {
         this.app.get("/", (req, res) => {
-            res.json({ message: "Hello World" });
+            res.json({ message: `Hello World from ${req.hostname}` });
         });
     }
 

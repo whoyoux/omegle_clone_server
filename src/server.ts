@@ -21,7 +21,13 @@ export class Server {
     private initialize(): void {
         this.app = express();
         this.httpServer = createServer(this.app);
-        this.io = new SocketIOServer(this.httpServer);
+
+        //Need to change that!
+        this.io = new SocketIOServer(this.httpServer, {
+            cors: {
+                origin: "*",
+            },
+        });
     }
 
     private configureApp(): void {
